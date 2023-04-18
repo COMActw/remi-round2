@@ -8,9 +8,29 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <%= javascript_include_tag('application.js') %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary" style="width: 100%;">
+        <%= link_to "Funny Movies", root_path, class: "navbar-brand", style: "color: white; font-size: 40px;" %>
+
+        <div class="pull-right" style="display: flex; margin-right: 30px; margin-top: 8px; align-items: baseline;">
+            <% if current_user.nil? %>
+              <% if need_register? %>
+                <%= render partial: 'users/form'%>
+              <% else %>
+                <%= render partial: 'sessions/form'%>
+              <% end %>
+            <% else %>
+              <span style="margin-left: 5px;"> Welcome: <%= current_user&.email %> </span>
+              <%= link_to "Share a movie", share_video_path, class: "btn btn-info btn-sm", style: "margin-left: 5px;" %>
+              <%= button_to('Log out', logout_path, method: "delete", remote: true, class: "btn btn-info btn-sm", style: "margin-left: 5px;") %>
+            <% end %>
+        </div>
+    </nav>
+    <%=yield%>
   </body>
 </html>
