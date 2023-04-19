@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       if @user&.save
         format.html { redirect_to root_path }
       else
-        session[:need_register] = true unless @user.save
+        session[:need_register] = true
         format.html { render 'videos/index', status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -24,16 +24,12 @@ class UsersController < ApplicationController
   private
 
   def user_create_params
-    return unless user_params[:password].equal?(user_params[:password_confirmation])
+    return unless user_params[:password].match?(user_params[:password_confirmation])
 
     @user_create_params = {
       email: user_params[:email],
       password: user_params[:password]
     }
-  end
-
-  def set_user
-    @user = User.find(params[:id])
   end
 
   def user_params

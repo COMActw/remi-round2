@@ -53,8 +53,8 @@ gem 'bootsnap', require: false
 gem 'bcrypt'
 
 gem 'bootstrap-sass'
-gem 'sass-rails'
 gem 'jquery-rails'
+gem 'sass-rails'
 
 gem 'pry'
 gem 'pry-byebug'
@@ -66,16 +66,15 @@ gem 'youtube_search'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-
-  gem 'rubocop'
-
-  gem 'solargraph'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
+  gem 'solargraph'
+
+  gem 'rubocop'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -85,7 +84,24 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem 'rspec-rails'
+
+  gem 'rubocop-rspec'
+
+  gem 'faker'
+
   gem 'capybara'
+
+  gem 'rails-controller-testing'
+
   gem 'selenium-webdriver'
   gem 'webdrivers'
+
+  gem 'shoulda-matchers', '~> 3.0', require: false
+
+  gem 'database_cleaner'
+
+  gem 'simplecov', require: false
+
+  gem 'factory_bot_rails'
 end

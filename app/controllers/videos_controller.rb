@@ -23,6 +23,7 @@ class VideosController < ApplicationController
   end
 
   private
+
   def video_create_params
     return if video_info.nil?
 

@@ -6,5 +6,5 @@
     <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
     <%= f.password_field :password_confirmation, placeholder: 'Confirm password', class: 'form-control' %>
     <%= f.submit 'Register', :class => 'btn btn-info btn-sm' %>
-    <%= link_to "Login", root_path(session[:need_register]=nil), class: "btn btn-info btn-sm" %>
+    <%= link_to "Login", root_path(session[:need_register] = nil), class: "btn btn-info btn-sm" %>
 <% end %>

@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   resources :videos
   resources :users
+  resources :sesions
 
   root 'videos#index'
   get '/signup', to: 'users#new'
