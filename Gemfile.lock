@@ -102,6 +102,8 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    dockerfile-rails (1.2.5)
+      rails
     e2mmap (0.1.0)
     erubi (1.12.0)
     execjs (2.8.1)
@@ -163,6 +165,8 @@ GEM
     net_http_timeout_errors (1.0.0)
     nio4r (2.5.9)
     nokogiri (1.14.3-x64-mingw-ucrt)
+      racc (~> 1.4)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     oga (3.4)
       ast
@@ -308,6 +312,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.2-x64-mingw-ucrt)
+    sqlite3 (1.6.2-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.1)
@@ -347,6 +352,7 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
   bcrypt
@@ -355,6 +361,7 @@ DEPENDENCIES
   capybara
   database_cleaner
   debug
+  dockerfile-rails (>= 1.2)
   factory_bot_rails
   faker
   importmap-rails

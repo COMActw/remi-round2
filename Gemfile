@@ -111,3 +111,7 @@ group :test do
 
   gem 'factory_bot_rails'
 end
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
+
+gem 'rexml'
