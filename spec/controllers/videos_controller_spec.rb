@@ -59,10 +59,9 @@ RSpec.describe VideosController, type: :controller do
         end.to_not change(Video, :count)
       end
 
-      it 'renders the new template with unprocessable_entity status' do
+      it 'recieve invalid url' do
         post :create, params: invalid_params
-        expect(response).to render_template(:new)
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to redirect_to new_video_path
       end
     end
   end

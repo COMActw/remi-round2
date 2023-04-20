@@ -1,24 +1,34 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :validate_match, only: :create
 
   def new
     @user = User.new
   end
 
   def create
+    return unless validate_match
+
     @user = User.new(user_create_params)
 
-    respond_to do |format|
-      if @user&.save
-        format.html { redirect_to root_path }
-      else
-        session[:need_register] = true
-        format.html { render 'videos/index', status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user&.save
+      session[:need_register] = false
+      redirect_to root_path, flash: { success: 'Resgister success' }
+    else
+      session[:need_register] = true
+      redirect_to root_path, flash: { danger: 'Invalid email or password' }
     end
+  end
+
+  def validate_match
+    unless user_params[:password].match?(user_params[:password_confirmation])
+      session[:need_register] = true
+      redirect_to root_path, flash: { danger: 'Confirmation password not match' }
+
+      false
+    end
+    true
   end
 
   private

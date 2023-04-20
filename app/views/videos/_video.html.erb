@@ -1,14 +1,13 @@
 
-
-<div class="card border-primary" style="width: fit-content; margin-bottom: 30px;">
-  <div class="card-horizontal" style="display: flex; flex: 1 1 auto;">
+<div class="card border-primary" style="width: fit-content; margin-bottom: 30px; border-style: solid; padding: 5px; border-radius: 5px; border-color: #337ab7">
+  <div class="card-horizontal">
     <div class="img-square-wrapper">
       <%= video.embed_code.html_safe %>
     </div>
     <div class="card-body" style=" margin-left: 20px">
-      <h4 class="card-title"> <%= video.title %> </h4>
-      <p class="card-text"> <%= video.shared_by %> </p>
-      <p class="card-text" style= "overflow: auto;"> <%= video.description %> </p>
+      <h4 class="card-title" style= "overflow: hiden;"> <%= video.title %> </h4>
+      <p class="card-text" style= "overflow: hiden;"> <%= video.shared_by %> </p>
+      <p class="card-text" style= "overflow: hiden;"> <%= video.description %> </p>
     </div>
   </div>
 </div>

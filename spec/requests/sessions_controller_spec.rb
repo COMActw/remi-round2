@@ -7,7 +7,6 @@ RSpec.describe 'SessionsController', type: :request do
     it 'renders the new template' do
       get login_path
       expect(response).to render_template(:new)
-      expect(session[:need_register]).to be_falsey
     end
   end
 

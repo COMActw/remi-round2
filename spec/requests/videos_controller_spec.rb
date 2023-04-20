@@ -52,8 +52,7 @@ RSpec.describe 'VideosController', type: :request do
 
       it 'does not create a new video and renders the new template' do
         post videos_path, params: invalid_params
-        expect(response).to render_template(:new)
-        expect(assigns(:video)).to be_a_new(Video)
+        expect(response).to redirect_to new_video_path
       end
     end
   end

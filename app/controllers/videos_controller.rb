@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'uri'
 class VideosController < ApplicationController
   def index
     @videos = Video.all
@@ -10,19 +10,33 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(video_create_params)
+    return redirect_to new_video_path, flash: { danger: 'Invalid URL' } if video_create_params.nil?
 
+    @video = Video.new(video_create_params)
+    @video.save
     respond_to do |format|
-      if @video.save
-        format.html { redirect_to root_path }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @video.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to root_path }
     end
   end
 
+  def video_info
+    return nil unless valid_url?(video_params[:url])
+
+    @video_info = VideoInfo.new(video_params[:url]) unless video_params[:url].blank?
+  end
+
   private
+
+  def valid_url?(url)
+    yts_regexp = %r{^https://(?:www\.)?youtube.com/watch\?(?=[^?]*v=\w+)(?:[^\s?]+)?$}
+    yt_regexp = %r{^http://(?:www\.)?youtube.com/watch\?(?=[^?]*v=\w+)(?:[^\s?]+)?$}
+
+    if yts_regexp.match(url) || yt_regexp.match(url)
+      true
+    else
+      false
+    end
+  end
 
   def video_create_params
     return if video_info.nil?
@@ -34,10 +48,6 @@ class VideosController < ApplicationController
       url: video_params[:url],
       embed_code: video_info.embed_code
     }
-  end
-
-  def video_info
-    @video_info = VideoInfo.new(video_params[:url]) unless video_params[:url].blank?
   end
 
   def video_params

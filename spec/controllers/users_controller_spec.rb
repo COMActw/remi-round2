@@ -49,8 +49,7 @@ RSpec.describe UsersController, type: :controller do
 
       it 'renders the videos/index template with unprocessable_entity status' do
         post :create, params: invalid_params
-        expect(response).to render_template('videos/index')
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to redirect_to(root_path)
       end
     end
   end

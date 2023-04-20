@@ -14,4 +14,5 @@ Rails.application.routes.draw do
 
   get '/share-video', to: 'videos#new', as: 'share_video'
   post '/share-video', to: 'videos#create'
+  get '*unmatched_route', to: 'application#raise_not_found'
 end

@@ -63,7 +63,7 @@ gem 'youtube_search'
 gem 'rexml'
 
 group :production do
-    gem 'pg'
+  gem 'pg'
 end
 
 group :development, :test do

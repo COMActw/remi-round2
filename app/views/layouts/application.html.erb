@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= favicon_link_tag asset_path('favicon.ico') %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= javascript_importmap_tags %>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <%= javascript_include_tag('application.js') %>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary" style="width: 100%;">
-        <%= link_to "Funny Movies", root_path, class: "navbar-brand", style: "color: white; font-size: 40px;" %>
-
-        <div class="pull-right" style="display: flex; margin-right: 30px; margin-top: 8px; align-items: baseline;">
+    <nav role="navigation" class="navbar navbar-toggleable-md navbar-expand-md navbar-dark bg-primary">
+          <div class="window" style="width: fit-content;">
+            <%= link_to "Funny Movies", root_path, class: "navbar-brand", style: "color: white; font-size: 40px;" %>
+          </div>
+          <div class="window pull-right" style="display: flex; margin-right: 30px; margin-top: 8px; align-items: baseline;">
             <% if current_user.nil? %>
               <% if need_register? %>
                 <%= render partial: 'users/form'%>
@@ -26,11 +27,42 @@
               <% end %>
             <% else %>
               <span style="margin-left: 5px;"> Welcome: <%= current_user&.email %> </span>
-              <%= link_to "Share a movie", share_video_path, class: "btn btn-info btn-sm", style: "margin-left: 5px;" %>
+              <%= link_to "Share a movie", new_video_path, class: "btn btn-info btn-sm", style: "margin-left: 5px;" %>
               <%= button_to('Log out', logout_path, method: "delete", remote: true, class: "btn btn-info btn-sm", style: "margin-left: 5px;") %>
             <% end %>
+          </div>
+
+        <div class="mobile" style="width: 100%;">
+          <div class="pull-left">
+            <div id="menuToggle">
+                <input type="checkbox" />
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              <ul id="menu" style="display: grid;">
+                <% if current_user.nil? %>
+                  <%= link_to "Login", login_path, class: "btn btn-info btn-sm", style: "margin-left: 5px; height: 32px; width: 83px;" %>
+                  <%= link_to "Register", signup_path, class: "btn btn-info btn-sm", style: "margin-left: 5px; height: 32px; width: 83px;" %>
+                <% else %>
+                  <span style="margin-left: 5px; color: #337ab7"> Welcome: <%= current_user&.email %> </span>
+                  <%= link_to "Share a movie", new_video_path, class: "btn btn-info btn-sm", style: "margin-left: 5px; height: 32px; width: 83px;" %>
+                  <%= button_to('Log out', logout_path, method: "delete", remote: true, class: "btn btn-info btn-sm", style: "margin-left: 5px; height: 32px; width: 83px;") %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <%= link_to "Funny Movies", root_path, class: "navbar-brand", style: "color: white; font-size: 40px;" %>
         </div>
     </nav>
+    <div class="arlert-section" style="width: 100%; height: 62px">
+      <% flash.each do |name, msg| %>
+        <% if name.match?('success')%>
+          <%= content_tag(:div, msg, class: "alert alert-success text-center") %>
+        <% else %>
+          <%= content_tag(:div, msg, class: "alert alert-danger text-center") %>
+        <% end %>
+      <% end %>
+    </div>
     <%=yield%>
   </body>
 </html>

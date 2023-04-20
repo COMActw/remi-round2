@@ -1,6 +1,13 @@
-<%= form_with model: @user, url: users_path, local: true do |f| %>
-  <%= f.email_field :email, placeholder: 'Email' %>
-  <%= f.password_field :password, placeholder: 'Password' %>
-  <%= f.password_field :password_confirmation, placeholder: 'Confirm password' %>
-  <%= f.submit 'Register' %>
-<% end %>
+<div class="container border">
+  <div class="row justify-content-center">
+    <% @user = User.new %>
+    <%= form_with model: @user, 
+      local: true,
+      html: {class: "form-inline"} do |f| %>
+        <%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>
+        <%= f.password_field :password, placeholder: 'Password', class: 'form-control', required: true %>
+        <%= f.password_field :password_confirmation, placeholder: 'Confirm password', class: 'form-control', required: true %>
+        <%= f.submit 'Register', :class => 'btn btn-info btn-sm' %>
+    <% end %>
+  </div>
+</div>

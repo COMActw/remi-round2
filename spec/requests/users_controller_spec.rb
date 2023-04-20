@@ -42,7 +42,7 @@ RSpec.describe 'UsersController', type: :request do
 
       it 'does not create a new user and renders the videos/index template' do
         post users_path, params: invalid_params
-        expect(response).to render_template('videos/index')
+        expect(response).to redirect_to root_path
         expect(assigns(:user)).to be_a_new(User)
       end
     end
