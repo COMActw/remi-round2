@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'uri'
 class VideosController < ApplicationController
   def index
@@ -15,7 +16,7 @@ class VideosController < ApplicationController
     @video = Video.new(video_create_params)
     @video.save
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_path, flash: { success: 'Video was successfully created' } }
     end
   end
 

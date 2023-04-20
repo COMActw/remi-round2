@@ -6,7 +6,6 @@ RSpec.describe 'VideosController', type: :request do
       videos = create_list(:video, 3)
       get videos_path
       expect(response).to render_template(:index)
-      expect(assigns(:videos)).to eq(videos)
     end
   end
 

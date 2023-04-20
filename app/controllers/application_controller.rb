@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def raise_not_found
-    raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
+    raise ActionController::RoutingError, "No route matches #{params[:unmatched_route]}"
   end
 
   def not_found

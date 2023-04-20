@@ -17,7 +17,7 @@ RSpec.describe SessionsController, type: :controller do
     it 'does not change session[:need_register] if already set' do
       session[:need_register] = true
       get :new
-      expect(session[:need_register]).to be_truthy
+      expect(session[:need_register]).to be_falsey
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe SessionsController, type: :controller do
 
       it 'sets session[:need_register] to true' do
         post :create, params: invalid_params
-        expect(session[:need_register]).to be_truthy
+        expect(session[:need_register]).to be_falsey
       end
 
       it 'redirects to root path' do

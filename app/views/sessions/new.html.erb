@@ -1,13 +1,16 @@
 <div class="container border">
-  <div class="row justify-content-center">
+  <div class="form-box" style="text-align: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;">
     <%= form_with scope: :session,
       url: login_path,
       local: true,
-      html: {class: "form-inline"} do |f| %>
-        <%= f.email_field :email, placeholder: 'Email', class: 'form-control' %>
-        <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
+      html: {class: "card-body form-inline", style: "width:80%;"} do |f| %>
+        <%= f.email_field :email, placeholder: 'Email', style: "margin-bottom:3px;", class: 'form-control', required: true %>
+        <%= f.password_field :password, placeholder: 'Password', style: "margin-bottom:3px;", class: 'form-control' %>
         <%= f.submit 'Log in', :class => 'btn btn-info btn-sm' %>
-        <%= link_to "Register", root_path(session[:need_register] = true), class: "btn btn-info btn-sm" %>
     <% end %>
   </div>
 </div>

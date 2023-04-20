@@ -1,12 +1,16 @@
 <div class="container border">
-  <div class="row justify-content-center">
+  <div class="form-box" style="text-align: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;">
     <% @user = User.new %>
-    <%= form_with model: @user, 
+    <%= form_with model: @user,
       local: true,
-      html: {class: "form-inline"} do |f| %>
-        <%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>
-        <%= f.password_field :password, placeholder: 'Password', class: 'form-control', required: true %>
-        <%= f.password_field :password_confirmation, placeholder: 'Confirm password', class: 'form-control', required: true %>
+      html: {class: "form-inline", style: "width:80%;"} do |f| %>
+        <%= f.email_field :email, placeholder: 'Email', class: 'form-control', style: "margin-bottom:3px;", required: true %>
+        <%= f.password_field :password, placeholder: 'Password', class: 'form-control', style: "margin-bottom:3px;", required: true %>
+        <%= f.password_field :password_confirmation, placeholder: 'Confirm password', class: 'form-control', style: "margin-bottom:3px;", required: true %>
         <%= f.submit 'Register', :class => 'btn btn-info btn-sm' %>
     <% end %>
   </div>

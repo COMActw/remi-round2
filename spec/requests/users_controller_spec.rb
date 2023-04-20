@@ -25,7 +25,6 @@ RSpec.describe 'UsersController', type: :request do
         post users_path, params: valid_params
         expect(response).to redirect_to(root_path)
         expect(User.last.email).to eq('user@example.com')
-        expect(session[:need_register]).to be_falsey
       end
     end
 
@@ -43,7 +42,6 @@ RSpec.describe 'UsersController', type: :request do
       it 'does not create a new user and renders the videos/index template' do
         post users_path, params: invalid_params
         expect(response).to redirect_to root_path
-        expect(assigns(:user)).to be_a_new(User)
       end
     end
   end

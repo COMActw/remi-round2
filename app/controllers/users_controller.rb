@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :validate_match, only: :create
+  before_action :validate_exist, only: :create
 
   def new
     @user = User.new
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
 
   def create
     return unless validate_match
+    return unless validate_exist
 
     @user = User.new(user_create_params)
 
@@ -26,6 +28,15 @@ class UsersController < ApplicationController
       session[:need_register] = true
       redirect_to root_path, flash: { danger: 'Confirmation password not match' }
 
+      false
+    end
+    true
+  end
+
+  def validate_exist
+    if User.find_by(email: user_params[:email])
+      session[:need_register] = true
+      redirect_to root_path, flash: { danger: 'User already exist' }
       false
     end
     true
